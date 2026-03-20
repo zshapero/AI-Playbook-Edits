@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chapter 3: Education & Enablement</title>
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
     <style>
         * {
             margin: 0;
@@ -1731,19 +1731,6 @@
             gap: 12px;
             flex-wrap: wrap;
         }
-        .air-btn-download {
-            background: #0B38DB;
-            border: 2px solid #0B38DB;
-            border-radius: 6px;
-            padding: 11px 22px;
-            font-family: 'Open Sans', sans-serif;
-            font-size: 14px; font-weight: 700;
-            color: #fff;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-        .air-btn-download:hover { background: #0930b5; }
-        .air-btn-download:disabled { opacity: 0.6; cursor: wait; }
         .air-btn-email {
             background: #FF7600;
             border: 2px solid #FF7600;
@@ -1975,7 +1962,6 @@
                 </div>
 
                 <div class="air-results-actions">
-                    <button class="air-btn-download" onclick="airDownloadPNG(this)">⬇ &nbsp;Save Results as Image</button>
                     <button class="air-btn-email" onclick="airEmailResults()">✉ &nbsp;Email My Results</button>
                     <button class="air-btn-retake" onclick="airRetake()">↺ &nbsp;Retake Assessment</button>
                 </div>
@@ -2152,24 +2138,6 @@ function airShowResults() {
     airShow('air-results');
 }
 
-function airDownloadPNG(btn) {
-    btn.disabled = true;
-    btn.textContent = 'Generating…';
-    const card = document.querySelector('#air-results .air-card');
-    html2canvas(card, { scale: 2, backgroundColor: '#ffffff', useCORS: true }).then(function(canvas) {
-        var link = document.createElement('a');
-        link.download = 'AI-Readiness-Results.png';
-        link.href = canvas.toDataURL('image/png');
-        link.click();
-        btn.disabled = false;
-        btn.innerHTML = '⬇ &nbsp;Save Results as Image';
-    }).catch(function() {
-        alert('Could not generate image. Please try using a screenshot instead.');
-        btn.disabled = false;
-        btn.innerHTML = '⬇ &nbsp;Save Results as Image';
-    });
-}
-
 function airEmailResults() {
     const personaName = document.getElementById('airPersonaName').textContent;
     const personaTag  = document.getElementById('airPersonaTag').textContent;
@@ -2178,6 +2146,33 @@ function airEmailResults() {
     const intScore    = document.getElementById('airIntNum').textContent.replace('/25', '');
     const tipText     = document.getElementById('airTipText').innerText;
 
+    const famQuestions = [
+        '1. "I regularly use AI-powered tools (e.g., chatbots, predictive analytics, automation) in my work at my BSP."',
+        '2. "I understand how AI can optimize network management, customer support, or service provisioning in our industry."',
+        '3. "I can confidently evaluate AI-driven recommendations for my daily business decisions."',
+        '4. "I have explored AI tools beyond what is required for my role to improve my efficiency."',
+        '5. "If given a new AI tool, I feel comfortable learning how to use it without extensive training."'
+    ];
+    const intQuestions = [
+        '6. "I actively look for ways AI could improve my work."',
+        '7. "I believe AI can help our company improve efficiency and customer satisfaction."',
+        '8. "I would be willing to take additional training to learn how to apply AI effectively in my role."',
+        '9. "I often experiment with AI-powered features in the tools I already use (e.g., chatbots, automated reports, virtual assistants)."',
+        '10. "I encourage my colleagues to explore AI-powered solutions for common challenges in our business."'
+    ];
+    const scaleLabels = ['Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree'];
+
+    var famDetails = '';
+    for (var i = 0; i < famQuestions.length; i++) {
+        var val = airAnswers[i + 1] || 0;
+        famDetails += '  ' + famQuestions[i] + '\n    Answer: ' + val + ' — ' + (scaleLabels[val - 1] || 'No answer') + '\n\n';
+    }
+    var intDetails = '';
+    for (var i = 0; i < intQuestions.length; i++) {
+        var val = airAnswers[i + 6] || 0;
+        intDetails += '  ' + intQuestions[i] + '\n    Answer: ' + val + ' — ' + (scaleLabels[val - 1] || 'No answer') + '\n\n';
+    }
+
     const subject = encodeURIComponent('My AI Readiness Assessment Results — ' + personaName);
     const body = encodeURIComponent(
         'AI READINESS ASSESSMENT RESULTS\n' +
@@ -2185,10 +2180,12 @@ function airEmailResults() {
         'Profile: ' + personaName + '\n' +
         'Category: ' + personaTag + '\n\n' +
         personaDesc + '\n\n' +
-        'SCORES\n' +
-        '------\n' +
-        'AI Familiarity: ' + famScore + '/25\n' +
-        'AI Interest: ' + intScore + '/25\n\n' +
+        'AI FAMILIARITY SCORE: ' + famScore + '/25\n' +
+        '-----------------------------------\n' +
+        famDetails +
+        'AI INTEREST SCORE: ' + intScore + '/25\n' +
+        '-----------------------------------\n' +
+        intDetails +
         'PERSONALIZED NEXT STEPS\n' +
         '-----------------------\n' +
         tipText + '\n'
