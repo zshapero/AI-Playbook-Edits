@@ -1744,6 +1744,18 @@
         }
         .air-btn-download:hover { background: #0930b5; }
         .air-btn-download:disabled { opacity: 0.6; cursor: wait; }
+        .air-btn-email {
+            background: #FF7600;
+            border: 2px solid #FF7600;
+            border-radius: 6px;
+            padding: 11px 22px;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 14px; font-weight: 700;
+            color: #fff;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .air-btn-email:hover { background: #e06a00; }
 
         /* ================================================================
            RESPONSIVE
@@ -1964,6 +1976,7 @@
 
                 <div class="air-results-actions">
                     <button class="air-btn-download" onclick="airDownloadPNG(this)">⬇ &nbsp;Save Results as Image</button>
+                    <button class="air-btn-email" onclick="airEmailResults()">✉ &nbsp;Email My Results</button>
                     <button class="air-btn-retake" onclick="airRetake()">↺ &nbsp;Retake Assessment</button>
                 </div>
 
@@ -1998,7 +2011,7 @@ const PERSONAS = {
         tag:     'High Familiarity · High Interest',
         color:   '#0B38DB',
         desc:    "You're all-in! You understand AI, you've used it, and you're eager to put it to work in strategic ways. You see the potential and want to lead others in using it effectively.",
-        tip:     `Lead with strategy and scale. Deepen your leadership approach through <strong>Leading the AI-Empowered Workforce in Broadband</strong>, where you'll explore workforce-wide AI use cases and how Calix is enabling AI adoption. Pair this with the <strong>Calix AI Leadership Playbook</strong> (Coming Soon) to guide practical, scalable decisions, and expand your strategic view by engaging with insights from the <strong>AI Strategy Summit</strong>, where leaders share how AI-native organizations drive real results.`
+        tip:     `Lead with strategy and scale. Deepen your leadership approach through <strong>Leading the AI-Empowered Workforce in Broadband</strong>, where you'll explore workforce-wide AI use cases and how Calix is enabling AI adoption. Expand your strategic view by engaging with insights from the <strong>AI Strategy Summit</strong>, where leaders share how AI-native organizations drive real results.`
     },
     disrupter: {
         key:     'disrupter',
@@ -2155,6 +2168,33 @@ function airDownloadPNG(btn) {
         btn.disabled = false;
         btn.innerHTML = '⬇ &nbsp;Save Results as Image';
     });
+}
+
+function airEmailResults() {
+    const personaName = document.getElementById('airPersonaName').textContent;
+    const personaTag  = document.getElementById('airPersonaTag').textContent;
+    const personaDesc = document.getElementById('airPersonaDesc').textContent;
+    const famScore    = document.getElementById('airFamNum').textContent.replace('/25', '');
+    const intScore    = document.getElementById('airIntNum').textContent.replace('/25', '');
+    const tipText     = document.getElementById('airTipText').innerText;
+
+    const subject = encodeURIComponent('My AI Readiness Assessment Results — ' + personaName);
+    const body = encodeURIComponent(
+        'AI READINESS ASSESSMENT RESULTS\n' +
+        '================================\n\n' +
+        'Profile: ' + personaName + '\n' +
+        'Category: ' + personaTag + '\n\n' +
+        personaDesc + '\n\n' +
+        'SCORES\n' +
+        '------\n' +
+        'AI Familiarity: ' + famScore + '/25\n' +
+        'AI Interest: ' + intScore + '/25\n\n' +
+        'PERSONALIZED NEXT STEPS\n' +
+        '-----------------------\n' +
+        tipText + '\n'
+    );
+
+    window.location.href = 'mailto:?subject=' + subject + '&body=' + body;
 }
 
 function airRetake() {
