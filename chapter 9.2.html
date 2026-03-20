@@ -271,6 +271,164 @@
             margin: 0;
         }
 
+        /* ── Trust Reflection ── */
+        .trust-reflection {
+            background: #fff;
+            border: 2px solid #0B38DB;
+            border-radius: 12px;
+            padding: 36px 40px;
+            margin: 36px 0;
+            position: relative;
+        }
+
+        .trust-reflection-header {
+            font-family: 'Merriweather', serif;
+            font-size: 26px;
+            font-weight: 700;
+            color: #0B38DB;
+            margin-bottom: 8px;
+        }
+
+        .trust-reflection-subhead {
+            font-size: 20px;
+            color: #666;
+            margin-bottom: 28px;
+            font-style: italic;
+        }
+
+        .trust-question {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            padding: 18px 0;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .trust-question:last-child {
+            padding-bottom: 0;
+        }
+
+        .trust-question-number {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 2px solid #FF7600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Merriweather', serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: #FF7600;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .trust-question-text {
+            font-size: 23px;
+            color: #333;
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        .trust-question-context {
+            font-size: 19px;
+            color: #666;
+            line-height: 1.5;
+            margin-top: 6px;
+            font-style: normal;
+        }
+
+        /* ── Stakes Escalation Visual ── */
+        .stakes-visual {
+            display: flex;
+            align-items: stretch;
+            gap: 20px;
+            margin: 48px 0;
+        }
+
+        .stakes-stage {
+            flex: 1;
+            padding: 48px 36px;
+            text-align: center;
+            position: relative;
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        .stakes-stage.stage-1 {
+            background: #f0f4ff;
+            border: 2px solid #c5d2f8;
+        }
+
+        .stakes-stage.stage-2 {
+            background: #fff8f0;
+            border: 2px solid #ffddb8;
+        }
+
+        .stakes-stage.stage-3 {
+            background: #fff0f0;
+            border: 2px solid #f8c5c5;
+        }
+
+        .stakes-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            color: #bbb;
+            flex-shrink: 0;
+            padding-top: 80px;
+        }
+
+        .stakes-icon {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            margin-bottom: 24px;
+            flex-shrink: 0;
+        }
+
+        .stakes-stage.stage-1 .stakes-icon { background: #dce6ff; }
+        .stakes-stage.stage-2 .stakes-icon { background: #ffe8cc; }
+        .stakes-stage.stage-3 .stakes-icon { background: #ffd6d6; }
+
+        .stakes-label {
+            font-size: 17px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 14px;
+            padding: 6px 16px;
+            border-radius: 20px;
+        }
+
+        .stakes-stage.stage-1 .stakes-label { color: #0B38DB; background: #dce6ff; }
+        .stakes-stage.stage-2 .stakes-label { color: #c85a00; background: #ffe8cc; }
+        .stakes-stage.stage-3 .stakes-label { color: #c0392b; background: #ffd6d6; }
+
+        .stakes-title {
+            font-family: 'Merriweather', serif;
+            font-size: 26px;
+            font-weight: 700;
+            color: #222;
+            margin-bottom: 16px;
+            line-height: 1.3;
+        }
+
+        .stakes-desc {
+            font-size: 20px;
+            color: #555;
+            line-height: 1.75;
+        }
+
         /* ── Leadership Actions (minimal) ── */
         .actions-list {
             margin: 32px 0;
@@ -584,6 +742,84 @@
                     <p class="role-card-desc">Ensures compliance, auditability, and controls are functioning across all AI operations.</p>
                 </div>
             </div>
+        </div>
+
+        <h2>Trust Is the Real Output of Data Quality</h2>
+
+        <p>Agents don't fail because they lack capability. They fail when they are not trustworthy. As more employees and subscribers interact with agents, they are each asking themselves a set of critical questions — and how they answer those questions will determine whether your agent investments succeed or stall.</p>
+
+        <p>Trust is built on data quality. When the information agents rely on is incomplete, outdated, or inconsistent, they don't solve problems — they scale confusion. When data is accurate, current, and connected, agents become reliable partners that teams are willing to act on.</p>
+
+        <div class="trust-reflection">
+            <div class="trust-reflection-header">Ask Yourself — and Your Team</div>
+            <div class="trust-reflection-subhead">These are the questions your employees and subscribers are already asking. How you answer them will determine whether agent adoption succeeds or stalls.</div>
+
+            <div class="trust-question">
+                <div class="trust-question-number">1</div>
+                <div>
+                    <div class="trust-question-text">"Do I trust this agent to give me an accurate and reliable answer?"</div>
+                    <div class="trust-question-context">If the underlying knowledge is wrong, the answer will be wrong — and people will stop asking.</div>
+                </div>
+            </div>
+
+            <div class="trust-question">
+                <div class="trust-question-number">2</div>
+                <div>
+                    <div class="trust-question-text">"Do I trust that this recommendation is based on complete and current information?"</div>
+                    <div class="trust-question-context">Agents are only as current as the data they draw from. Stale knowledge produces stale guidance — at scale.</div>
+                </div>
+            </div>
+
+            <div class="trust-question">
+                <div class="trust-question-number">3</div>
+                <div>
+                    <div class="trust-question-text">"Do I trust that this agent is working from the same reality I am?"</div>
+                    <div class="trust-question-context">When employees and agents operate from different versions of the truth, coordination breaks down. Shared, enriched knowledge is what keeps everyone aligned.</div>
+                </div>
+            </div>
+
+            <div class="trust-question">
+                <div class="trust-question-number">4</div>
+                <div>
+                    <div class="trust-question-text">"Do I trust that I can reach a human if something goes wrong?"</div>
+                    <div class="trust-question-context">Even the best agent needs a clear escalation path. Confidence in automation grows when people know the safety net exists.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="callout-box">
+            <p><strong>Trust is the threshold</strong> at which data quality becomes a leadership issue rather than a technical one. Without it, agents remain confined to pilots. With it, they scale.</p>
+        </div>
+
+        <h2>Why Cross-functional Orchestration Raises the Stakes</h2>
+
+        <p>As agents move from answering questions to executing tasks to orchestrating workflows, the consequence of poor data quality shifts dramatically. At Stage 1, a bad data point leads to a bad answer — a human catches it and moves on. At Stage 2, that same bad data point leads to a bad action, repeated across hundreds of transactions. At Stage 3, it cascades across agents, systems, and departments before anyone notices.</p>
+
+        <div class="stakes-visual">
+            <div class="stakes-stage stage-1">
+                <div class="stakes-icon">💡</div>
+                <div class="stakes-label">Knowledge Assist Stage</div>
+                <div class="stakes-title">Missed Opportunities</div>
+                <div class="stakes-desc">Poor data leads to incomplete answers that erode trust and slow adoption before agents can prove their value.</div>
+            </div>
+            <div class="stakes-arrow">→</div>
+            <div class="stakes-stage stage-2">
+                <div class="stakes-icon">⚠️</div>
+                <div class="stakes-label">Task Automation Stage</div>
+                <div class="stakes-title">Eroded Confidence</div>
+                <div class="stakes-desc">Inconsistent outputs from stale rules or data reduce team willingness to delegate tasks to agents, stalling adoption.</div>
+            </div>
+            <div class="stakes-arrow">→</div>
+            <div class="stakes-stage stage-3">
+                <div class="stakes-icon">🔴</div>
+                <div class="stakes-label">Orchestration Stage</div>
+                <div class="stakes-title">Scaled Operational Risk</div>
+                <div class="stakes-desc">Cross-agent workflows amplify data errors at enterprise speed, with limited human review to catch mistakes before they cascade.</div>
+            </div>
+        </div>
+
+        <div class="tip-box">
+            <p><strong>Key insight:</strong> The best time to build data discipline is before you need it for orchestration. The organizations that invest in these habits early will be the ones ready to scale when the technology matures.</p>
         </div>
 
         <!-- How Leadership Roles Evolve -->
