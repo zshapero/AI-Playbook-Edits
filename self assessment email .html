@@ -622,15 +622,36 @@ function emailResults() {
         personaDesc = 'You are at the start of your AI readiness journey — foundational learning and hands-on practice are your best next steps.';
     }
 
-    // Build domain scores section
+    // Build domain scores section with individual question answers
     var scoresText = '';
     var sorted = answered.slice().sort(function(a, b) { return sectionScores[b] - sectionScores[a]; });
+
+    // Collect question texts from the DOM
+    var questionTexts = {};
+    document.querySelectorAll('.question-row').forEach(function(row) {
+        var ratingGroup = row.querySelector('.rating-group');
+        if (ratingGroup) {
+            var qNum = parseInt(ratingGroup.dataset.q);
+            var textEl = row.querySelector('.question-text');
+            if (textEl) {
+                questionTexts[qNum] = textEl.textContent.replace(/^\d+\.\s*/, '').trim();
+            }
+        }
+    });
+
     sorted.forEach(function(d) {
         var s = sectionScores[d];
         var dom = DOMAINS[d];
         var tier = s <= 8 ? 'weak' : (s <= 11 ? 'moderate' : 'strong');
         var tierLabel = s <= 8 ? 'Needs Focus' : (s <= 11 ? 'Developing' : 'Strong');
         scoresText += '  Domain ' + (d + 1) + ': ' + dom.name + ' — ' + s + '/15 (' + tierLabel + ')\n';
+        var start = d * 3 + 1;
+        for (var qi = start; qi < start + 3; qi++) {
+            var rating = answers[qi] !== undefined ? answers[qi] : '-';
+            var qText = questionTexts[qi] || 'Question ' + qi;
+            scoresText += '    Q' + qi + ' (' + rating + '/5): ' + qText + '\n';
+        }
+        scoresText += '\n';
     });
 
     // Build recommendations section
